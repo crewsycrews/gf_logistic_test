@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\DeliveryDelivered;
-use App\Http\Requests\Request;
-use App\Http\Resources\User\UserResource;
+use App\Enums\DeliveryStatusEnum;
+use App\Http\Requests\Delivery\ChangeDeliveryStatusRequest;
 use App\Models\Delivery;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Foundation\Application;
+use App\Services\DeliveryService;
 use Symfony\Component\HttpFoundation\Response;
 
 class DeliveryController extends Controller
 {
-    public function statusChange(Request $request, Delivery $delivery): ResponseFactory|Application|\Illuminate\Http\Response
+    public function __construct(protected DeliveryService $deliveryService)
     {
-        // Плохой код, просто для первичного прохождения теста
-        $delivery->status = $request->input('status');
-        $delivery->save();
+    }
+    public function statusChange(ChangeDeliveryStatusRequest $request, Delivery $delivery): Response
+    {
+        $status = $request->enum('status', DeliveryStatusEnum::class);
+        $this->deliveryService->changeStatus($delivery, $status);
 
         return response('', Response::HTTP_OK);
     }

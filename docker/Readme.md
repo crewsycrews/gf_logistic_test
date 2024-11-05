@@ -1,4 +1,4 @@
-###Starting new project
+### Starting new project
 ```bash
     git clone ...
     docker-compose up
@@ -10,7 +10,7 @@
 
 ### Setting up docker-compose for phpStorm
 
-####Ubuntu
+#### Ubuntu
 
 * [Setting up Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1)
 
