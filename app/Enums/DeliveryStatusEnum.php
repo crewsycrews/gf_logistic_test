@@ -8,18 +8,18 @@ use App\Traits\EnumTrait;
 enum DeliveryStatusEnum: string implements FiniteStateMachineInterface
 {
     use EnumTrait;
-    case Planned = 'planned';
-    case Shipped = 'shipped';
-    case Delivered = 'delivered';
+    case PLANNED = 'planned';
+    case SHIPPED = 'shipped';
+    case DELIVERED = 'delivered';
 
     public function isValidTransition(FiniteStateMachineInterface $newState): bool
     {
         $transitions = [
-            DeliveryStatusEnum::Planned->value => [
-                DeliveryStatusEnum::Shipped,
+            DeliveryStatusEnum::PLANNED->value => [
+                DeliveryStatusEnum::SHIPPED,
             ],
-            DeliveryStatusEnum::Shipped->value => [
-                DeliveryStatusEnum::Delivered,
+            DeliveryStatusEnum::SHIPPED->value => [
+                DeliveryStatusEnum::DELIVERED,
             ],
         ];
 
